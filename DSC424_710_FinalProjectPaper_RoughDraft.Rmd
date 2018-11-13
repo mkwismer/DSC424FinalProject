@@ -110,15 +110,13 @@ The eight principal components identified are used to reduce the number of conti
 
 # Literature Review
 
-  There have been numerous studies that used the previously detailed health survey data to analyze various aspects of healthcare and its effects on the population. 
+  There have been numerous studies that used the previously detailed health survey data to analyze various aspects of healthcare and its effects on the population. These studies range from reviewing the reasons behind healtcare costs to policy implications in order to increase healthcare coverage in the U.S. population.
 
-For example, one study analyzed the health survey data to review the effects of complementary health on children [@Complementary-health-approaches]. The data found that the highest predictor of whether a child used complementary healthcare (i.e. alternative medicine like yoga or herbalists) was the parent. Therefore, while reviewing this data it was important to understand the effects of the household and how healthcare costs are related to the household. If a parent was having health issues, the child would also be affected.
+One study analyzed the health survey data to review the effects of complementary health on children [@Complementary-health-approaches]. The data found that the highest predictor of whether a child used complementary healthcare (i.e. alternative medicine like yoga or herbalists) was the parent. Therefore, while reviewing this data it was important to understand the effects of the household and how healthcare costs are related to the household. If a parent was having health issues, the child could also be affected.
 
 Another such study reviewed the health survey data in an attempt to find an association between obesity and sleep [@BMC-public-health]. Again providing evidence that the cost of healthcare has various factors that can affect it. The research also presented evidence that the cost of healthcare has other factors, such as sleep apnea or a small child in the household to feed it or change it that can cause healthcare costs to increase. 
 
 A third study provided evidence that injuries and the need for rehabilitation from those injuries increased one’s cost [@Physical-medicine]. The paper found that reducing back pain and spinal injuries would reduce the cost of healthcare in totality by upwards of $200 billion. This paper therefore provided one area of focus within the data for family members that needed help with routine care or personal care needs. 
-
-In any given year, a number of research projects are completed based on the previously mentioned health survey - among them the following:
 
 ----
 
@@ -128,9 +126,7 @@ In any given year, a number of research projects are completed based on the prev
 
 Multiple iterations were executed where the input variables changed, as well as the training and testing splits. The project group employed LDA as a model and also explored the results produced from enabling the cross validation parameter to gain insight into the variables the model identified to be the most impactful.
 
-After processing 59 numerical variables, multiple principal component and factor analyses were executed to pair down the original data set to 29 variables that provided above a 0.40 loading within a factor while also providing around 60% variance explanation for those 29 variables. This process was done by running multiple analyses of factor analysis.
-
-After preprocessing variables, there are 29 numeric variables with the same scale (# count in each family), exhibiting signs of a data set conducive to factor analysis. 
+Utilizing the dataset for factor analysis, the data was reduced to the numerical variables within the survey, numbering 59 variables. In order to reduce variables with n/a answers, the variables with any n/a observations were dropped, leaving 48 variables to be analyzed for factor analysis. After much data processing, including various factor analysis iterations and principal component iterations, the factor analysis that provided the best results ended with 19 variables. The 19 variables were broken into three distinct factors. The three factors provided around 50% variance explanation of the 19 variables. 
 
 Logistic regression was performed on the modified family health survey data set. The Medical Expense Cost variable was transformed to a binary variable. The logistic regression model was executed using binned categorical variables and numerical variables on a data set containing 26,000 observations and 128 variables. A substantial amount of time was spent on preprocessing the data set. Logistic regression identified 23 significant variables as key influencers of the dependent variable.
 
@@ -145,6 +141,8 @@ Parsimonious variable selection is considered a best practice for building effic
 Executing linear discriminant analysis produced favorable results that answered the primary research directly - based on the results of the national health survey, one can predict the health spending range of a family or individual. Cross validation was applied to the subset of variables used as inputs for the lda model to identify what variables the model found to be the most impactful in determining the target variable’s class.
 
 The model did not exhibit extremely strong accuracy, and that would most likely be the main focus of future analysis that included this data set. What additional data sets exist that could be used to augment the data set analyzed by the project group to increase the accuracy of a model?
+
+As discussed in the methods, the results for the factor analysis provided 19 variables broken into three factors that explained around 50% of the variance. The three factors can be described as follows for each family: 1) Likelihood of Insured 2) Likelihood of health issues 3) Likelihood of Being Elderly. See the appendix for the loadings for each variable and the total variance for each factor. Furthermore, each factor did have specific variables that influenced the factor more. For the first factor, a family with insurance and private insurance effected the value of the factor by around 80% each. The second factor was influenced at around 85% by family with work limits or family that is limited in any way. Finally the third factor was heavily influenced by family on medicare and family members over the age of 65. The benefit of reducing these 19 variables from the survey into 3 main factors will provide future opportunity of regression analysis and how healthcare cost potentially is effected by these three factors within the survey.
 
 The factor analysis conducted on the data set did not directly answer or explain the research question, as it did not provide strict predictability of what exactly is the cost of healthcare. Factor analysis did however provide factors that could be used in a regression to find the factors’ effects on healthcare costs. 
 
@@ -206,7 +204,7 @@ The above statistics show that the logistic regression model performed fairly we
 
 With an original dataset of well over 100 variables, exploratory analysis was conducted to determine which variables could be easily removed as either insignificant for the study, or containing a large imbalance of missing values that would make the variable unusable for analysis purposes. While categorical variables could be used for regression and other modeling approaches, it was determined that the continuous variables would be analyzed using principal components analysis to reduce the original 46 continuous variables to a few components which would be representative of the variance within the original variables. The relationships between the variables were examined using a correlation matrix and plot (figure 28 in the _Visualization Appendix_). The correlation plot in the _Visualization Appendix_ clearly identifies variables with strong and weak correlations between the variables. As a result, 12 variables were removed from the PCA that had weak correlations with other variables of less than .30. After removing five more variables that had greater than 30% of observations missing, the final data set used for the PCA contained 29 variables. The PCA was run with a loading value cutoff of .3, which produced 29 total components. Of the initial 29 components, 12 components contained .792 of the cumulative variance for the variables (figure 30). The scree plot shown in PCA Figure 2 identifies eight components with an eigenvalue of greater than or equal to 1. These eight components compose .639 of the cumulative variance for the variables. A few variables were found to be cross loaded on multiple components at the .3 loading score level. It was observed that most of the cross loadings had loading scores below .5, which were then addressed by rerunning the model with a loading score cutoff of .5. The final model only contained two cross loaded variables. These variables were assigned to components according to their highest load scores.
 
-The factor analysis and the principal component analysis that were done did result in similar factors/components for what the factor analysis described as Family Health Needs, therefore showing that these two analyses did result in similar components/factors. It would then be important to run potentially a future regression with the factors and components and find how these factors/components do affect healthcare cost. The project team did find that factor analysis could explain around 60% of the data using five factors, while the principal component analysis provided 64% with eight factors so it may be important to keep reviewing and re-writing the analysis to find a happy medium to provide that needed variance percentage while also providing good factors/components to research.
+The factor analysis and the principal component analysis that were done did result in similar factors/components for what the factor analysis described as Family Health Needs, therefore showing that these two analyses did result in similar components/factors. It would then be important to run potentially a future regression with the factors and components and find how these factors/components do affect healthcare cost. The project team did find that factor analysis could explain around 50 of the data using three factors, while the principal component analysis provided 64% with eight factors so it may be important to keep reviewing and re-writing the analysis to find a happy medium to provide that needed variance percentage while also providing good factors/components to research.
 
 In order to make our analysis simpler, the group refactored _FHICOST_ from six levels to two levels. So the project team could only analyze and predict whether the family spent more than \$500 in medical/dental care last year, which is a main limitation of the research. For further study in this area, one could try to predict the original six levels of _FHICOST_, but additional changes may arise, like imbalanced data since there are not many families spending a lot of money (more than $5,000) in our data set.
 In addition to these challenges, LDA and logistic regression models do not have a very high accuracy (around 70%) in predicting the levels. On the one hand, one can add some extra data set which may have strong correlation with _FHICOST_. Demographic data, geographic data and insurance data are examples of data sets that may allow future analysis to represent families more accurately. In addition to data set augmentation, the project group could improve implemented models by making full use of feature engineering work. One major shortcoming of the research conducted was not full implementation of PCA and FA results to represent all of the continuous variables as a part of input for logistic regression. Ideally, this could be completed in the future. Machine learning techniques like decision tree, random forest and gradient boost may aid in the development of classification models as well.
@@ -532,9 +530,9 @@ PCASet.k3$centers
 ## Factor Analysis
 ```{r code_appendix_FactorAnalysis, eval=FALSE, linewidth=60}
 
-# libraries
+#libraries
 
-library(foreign)
+library(foreign) 
 library(corrplot)
 library(car)
 library(QuantPsyc)
@@ -543,142 +541,71 @@ library(RColorBrewer)
 library(Hmisc)
 library(psych)
 library(dplyr)
+library(ggplot2)
 
 # Set the working directory
-setwd("C:/Users/User/Documents/DSC 424/Final Dataset")
+setwd("C:/Users/User/Documents/FinalData")
 
-# import final file#
-a1 <- read.csv("family_modified_001.csv")
+#import final file#
+a1 = read.csv("family_modified_001.csv")
 
-# read first files
-head(a1, 10)
+#reduce variables 
+#to numeric only
+#remove high -1 variables
 
-# create obs based upon values from 18 to 127
-b1 <- a1[, c(7, 18:127)]
+y1 = a1[, c(7,18,19,46,59:64,68,69,93,95,97,105,106,108,109:111,124)]
 
-# reduce variables
-z1 <- a1[, c(7, 18, 19, 21, 23, 25, 27, 29, 31, 33, 
-    39, 44:48, 57:69, 73, 93:119, 124, 127)]
+pc.y1 = prcomp(y1, scale=T)
 
-pc.z1 <- prcomp(z1, scale = T)
-pc.z1
+screeplot(pc.y1, npcs = 8,
+          type = "barplot", main = "Scree Plot")
+title(ylab="Variances", xlab="PCA Number")
+abline(h=1, lwd=4, col="black")
+summary(pc.y1)
 
-screeplot(pc.z1, npcs = 58, type = "barplot", main = "Scree Plot")
-title(ylab = "Variances", xlab = "PCA Number")
-abline(h = 1, lwd = 4, col = "black")
-summary(pc.z1)
+xy1 = psych::principal(y1, rotate="varimax", nfactors=4, score=TRUE)
+print(xy1$loadings, cutoff=.4, sort=T)
+print(xy1$loadings, cutoff=.5, sort=T)
+print(xy1$loadings, cutoff=.61, sort=T)
 
-xy1 <- psych::principal(z1, rotate = "varimax", nfactors = 8, 
-    score = TRUE)
-print(xy1$loadings, sort = T)
-print(xy1$loadings, cutoff = 0.559, sort = T)
-print(xy1$loadings, cutoff = 0.3, sort = T)
-print(xy1$loadings, cutoff = 0.5, sort = T)
-print(xy1$loadings, cutoff = 0.54, sort = T)
+xy2 = psych::principal(y1, rotate="varimax", nfactors=5, score=TRUE)
+print(xy2$loadings, cutoff=.4, sort=T)
+print(xy2$loadings, cutoff=.544, sort=T)
 
-xy2 <- psych::principal(z1, rotate = "varimax", nfactors = 16, 
-    score = TRUE)
-print(xy2$loadings, sort = T)
-print(xy2$loadings, cutoff = 0.559, sort = T)
-print(xy2$loadings, cutoff = 0.3, sort = T)
-print(xy2$loadings, cutoff = 0.5, sort = T)
+xy3 = psych::principal(y1, rotate="varimax", nfactors=4, score=TRUE)
+print(xy3$loadings, cutoff=.61, sort=T)
 
-# Remove non good variables
-z1$FHIPUBCT <- NULL
-z1$FHIOGVCT <- NULL
-z1$FHIIHSCT <- NULL
-z1$FINCOTCT <- NULL
-z1$FHICHPCT <- NULL
-z1$FPENSCT <- NULL
-z1$FTANFCT <- NULL
-z1$FOWBENCT <- NULL
-z1$FDGLWCT2 <- NULL
-z1$FHSTATVG <- NULL
-z1$FHCDVCT <- NULL
-z1$FHCPHRCT <- NULL
 
-# run some more
-xy1 <- psych::principal(z1, rotate = "varimax", nfactors = 8, 
-    score = TRUE)
-print(xy1$loadings, sort = T)
-print(xy1$loadings, cutoff = 0.559, sort = T)
-print(xy1$loadings, cutoff = 0.3, sort = T)
-print(xy1$loadings, cutoff = 0.5, sort = T)
-print(xy1$loadings, cutoff = 0.54, sort = T)
+fz1 = factanal(y1, 4)
+print(fz1$loadings, cutoff=.4, sort=T)
+print(fz1$loadings, cutoff=.3, sort=T)
 
-# Remove additional variables
-z1$FINTR1CT <- NULL
-z1$F10DVCT <- NULL
-z1$FHOSP2CT <- NULL
-z1$FHSTATG <- NULL
-z1$FHSTATFR <- NULL
-z1$FSNAPMYR <- NULL
-z1$FCHSPCT <- NULL
-z1$FHIMILCT <- NULL
-z1$FHIEXCT <- NULL
+fz2 = factanal(y1, 3)
+print(fz2$loadings, cutoff=.3, sort=T)
+print(fz2$loadings, cutoff=.36, sort=T)
 
-# run some more
-xy1 <- psych::principal(z1, rotate = "varimax", nfactors = 8, 
-    score = TRUE)
-print(xy1$loadings, sort = T)
-print(xy1$loadings, cutoff = 0.559, sort = T)
-print(xy1$loadings, cutoff = 0.3, sort = T)
-print(xy1$loadings, cutoff = 0.5, sort = T)
-print(xy1$loadings, cutoff = 0.54, sort = T)
-print(xy1$loadings, cutoff = 0.351, sort = T)
+h1 = a1[, c(19,46,59:64,68,69,93,95,97,105,106,108,109:111,124)]
 
-# run some more
-xy3 <- psych::principal(z1, rotate = "varimax", nfactors = 5, 
-    score = TRUE)
-print(xy3$loadings, sort = T)
-print(xy3$loadings, cutoff = 0.559, sort = T)
-print(xy3$loadings, cutoff = 0.3, sort = T)
+hz1 = factanal(h1, 3)
+print(hz1$loadings, cutoff=.3, sort=T)
+print(hz1$loadings, cutoff=.36, sort=T)
 
-# drop some more variables
-z1$FSSKDAYS <- NULL
-z1$FSNEDAYS <- NULL
-z1$FNMEDCT <- NULL
-z1$FDMEDCT <- NULL
+#new variables
+m1 = a1[, c(19,46,59:64,68,69,93,95,97,105,106,108,109:110,124)]
 
-# run some more
-xy1 <- psych::principal(z1, rotate = "varimax", nfactors = 8, 
-    score = TRUE)
-print(xy1$loadings, sort = T)
-print(xy1$loadings, cutoff = 0.559, sort = T)
-print(xy1$loadings, cutoff = 0.3, sort = T)
-print(xy1$loadings, cutoff = 0.5, sort = T)
+pc.m1 = prcomp(m1, scale=T)
 
-xy3 <- psych::principal(z1, rotate = "varimax", nfactors = 5, 
-    score = TRUE)
-print(xy3$loadings, sort = T)
-print(xy3$loadings, cutoff = 0.559, sort = T)
-print(xy3$loadings, cutoff = 0.3, sort = T)
+screeplot(pc.m1, npcs = 8,
+          type = "barplot", main = "Scree Plot")
+title(ylab="Variances", xlab="PCA Number")
+abline(h=1, lwd=4, col="black")
+summary(pc.m1)
 
-# Factoral Analysis
+m1 = a1[, c(19,46,59:64,68,69,93,95,97,105,106,108,109:110,124)]
+mz1 = factanal(m1, 3)
+print(mz1$loadings, cutoff=.3, sort=T)
+print(mz1$loadings, cutoff=.36, sort=T)
 
-fz1 <- factanal(z1, 8)
-print(fz1$loadings, cutoff = 0.4, sort = T)
-
-fz2 <- factanal(z1, 5)
-print(fz2$loadings, cutoff = 0.4, sort = T)
-
-# drop additional variables
-z1$FSSICT <- NULL
-z1$FDIVDCT <- NULL
-z1$FHCHMCT <- NULL
-z1$FSEINCCT <- NULL
-z1$FHCHMCT <- NULL
-
-# factor analysis
-fz3 <- factanal(z1, 5)
-print(fz3$loadings, cutoff = 0.44, sort = T)
-
-# drop cost variables
-z1$FHICOST <- NULL
-
-# run factor analysis
-fz4 <- factanal(z1, 5)
-print(fz4$loadings, cutoff = 0.44, sort = T)
 ```
 
 ## Logistic Regression
@@ -1749,3 +1676,7 @@ Please find the figures referenced throughout this paper below:
 -----
 
 # References
+1) Black, L. I., Clarke, T. C., Barnes, P. M., Stussman, B. J., & Nahin, R. L. (2015). Use of complementary health approaches among children aged 4-17 years in the United States: National Health Interview Survey, 2007-2012. National health statistics reports, (78), 1-19.
+2) Jean-Louis, G., Williams, N. J., Sarpong, D., Pandey, A., Youngstedt, S., Zizi, F., & Ogedegbe, G. (2014). Associations between inadequate sleep and obesity in the US adult population: analysis of the national health interview survey (1977-2009). BMC public health, 14, 290. doi:10.1186/1471-2458-14-290
+3) Ma, V. Y., Chan, L., & Carruthers, K. J. (2014). Incidence, prevalence, costs, and impact on disability of common conditions requiring rehabilitation in the United States: stroke, spinal cord injury, traumatic brain injury, multiple sclerosis, osteoarthritis, rheumatoid arthritis, limb loss, and back pain. Archives of physical medicine and rehabilitation, 95(5), 986-995.e1.
+
